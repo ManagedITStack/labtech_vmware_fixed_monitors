@@ -1,0 +1,15 @@
+/*!50001 DROP TABLE IF EXISTS `v_hvhmonitormemory`*/;
+/*!50001 DROP VIEW IF EXISTS `v_hvhmonitormemory`*/;
+/*!50001 CREATE ALGORITHM=UNDEFINED */
+/*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
+/*!50001 VIEW `v_hvhmonitormemory`AS
+SELECT
+  `v_hvhmemconsumed`.`Value`   AS `HVHmemconsumed`,
+  `v_hvhmemgranted`.`Value`    AS `HVHmemgranted`,
+  `v_hvhmemgranted`.`HVHID`    AS `HVHID`,
+  `v_hvhmemgranted`.`HostName` AS `Hostname`,
+  `v_hvhmemconsumed`.`Value` / `v_hvhmemgranted`.`Value` AS `PercentFree`
+FROM (`v_hvhmemconsumed`
+   LEFT JOIN `v_hvhmemgranted`
+     on ((`v_hvhmemconsumed`.`HVHID` = `v_hvhmemgranted`.`HVHID`)))
+*/;
